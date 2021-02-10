@@ -7,7 +7,7 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var teamsDBRouter = require("./routes/teams-db");
+var teamsDBRouter = require("./routes/myStorage-db");
 var myStorageRouter = require("./routes/myStorage-json");
 
 var app = express();

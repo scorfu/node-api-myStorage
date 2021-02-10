@@ -1,14 +1,23 @@
 [
   {
     "id": "abcdef1610310163146",
-    "firstName": "Nicolae",
-    "lastName": "Matei",
-    "gitHub": "nmatei"
+    "nameObj": "randomObj",
+    "category": "randomCategory",
+    "depositArea": "randomArea",
+    "depositDate": ""
   },
   {
     "id": "toze8j1610313009673",
-    "firstName": "Andrei",
-    "lastName": "Ille",
-    "gitHub": "illeandrei"
+    "nameObj": "randomObj2",
+    "category": "randomCategory2",
+    "depositArea": "randomArea2",
+    "depositDate": ""
+  },
+  {
+    "id": "jhoi8j1612977980712",
+    "nameObj": "test1",
+    "category": "Documents",
+    "depositArea": "Living",
+    "depositDate": "2021-02-11"
   }
 ]
