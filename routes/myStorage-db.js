@@ -11,17 +11,17 @@ const pool = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "teams"
+  database: "myStorage"
 });
 
 /**
- * run this before first USAGE to create members TABLE
+ * run this before first USAGE to create objects TABLE
  */
 router.get("/install", function (req, res, next) {
   pool.getConnection(function (err, connection) {
     if (err) throw err;
     const sql = `
-    CREATE TABLE IF NOT EXISTS members (id INT NOT NULL AUTO_INCREMENT, nameObj TEXT NOT NULL, category TEXT NOT NULL, depositArea TEXT NOT NULL, depositDate TEXT NOT NULL, PRIMARY KEY (id)) ENGINE = InnoDB;
+    CREATE TABLE IF NOT EXISTS objects (id INT NOT NULL AUTO_INCREMENT, nameObj TEXT NOT NULL, category TEXT NOT NULL, depositArea TEXT NOT NULL, depositDate DATE NOT NULL, PRIMARY KEY (id)) ENGINE = InnoDB;
     `;
     connection.query(sql, function (err, results) {
       if (err) throw err;
@@ -37,7 +37,7 @@ router.get("/install", function (req, res, next) {
 router.get("/", function (req, res, next) {
   pool.getConnection(function (err, connection) {
     if (err) throw err;
-    const sql = `SELECT id, nameObj, category, depositArea, depositDate FROM members`;
+    const sql = `SELECT id, nameObj, category, depositArea, depositDate FROM objects`;
     connection.query(sql, function (err, results) {
       if (err) throw err;
       connection.release();
@@ -57,7 +57,7 @@ router.post("/create", function (req, res, next) {
 
   pool.getConnection(function (err, connection) {
     if (err) throw err;
-    const sql = `INSERT INTO members (id, nameObj, category, depositArea, depositDate) VALUES (NULL, ?, ?, ?, ?);`;
+    const sql = `INSERT INTO objects (id, nameObj, category, depositArea, depositDate) VALUES (NULL, ?, ?, ?, ?);`;
     connection.query(sql, [nameObj, category, depositArea, depositDate], function (err, results) {
       if (err) throw err;
       const id = results.insertId;
@@ -78,7 +78,7 @@ router.delete("/delete", function (req, res, next) {
 
   pool.getConnection(function (err, connection) {
     if (err) throw err;
-    const sql = `DELETE FROM members WHERE id=?`;
+    const sql = `DELETE FROM objects WHERE id=?`;
     connection.query(sql, [id], function (err, results) {
       if (err) throw err;
       connection.release();
@@ -99,7 +99,7 @@ router.put("/update", function (req, res, next) {
 
   pool.getConnection(function (err, connection) {
     if (err) throw err;
-    const sql = `UPDATE members SET nameObj=?, category=?, depositArea=?, depositDate=? WHERE id=?`;
+    const sql = `UPDATE objects SET nameObj=?, category=?, depositArea=?, depositDate=? WHERE id=?`;
     connection.query(sql, [nameObj, category, depositArea, depositDate, id], function (err, results) {
       if (err) throw err;
       connection.release();
