@@ -37,7 +37,7 @@ router.get("/install", function (req, res, next) {
 router.get("/", function (req, res, next) {
   pool.getConnection(function (err, connection) {
     if (err) throw err;
-    const sql = `SELECT id, nameObj, category, depositArea, depositDate FROM myStorage`;
+    const sql = `SELECT id, nameObj, category, depositArea, DATE_FORMAT(depositDate, "%Y-%m-%d") as depositDate FROM myStorage`;
     connection.query(sql, function (err, results) {
       if (err) throw err;
       connection.release();
